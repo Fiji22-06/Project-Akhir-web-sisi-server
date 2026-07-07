@@ -6,27 +6,27 @@ $flash = get_flash();
             <div class="sidebar-brand">
                 <span class="brand-icon"><i class="bi bi-shop"></i></span>
                 <span>
-                    <strong>Manajemen</strong>
-                    <small>Toko</small>
+                    <strong>Admin</strong>
+                    <small>BROD</small>
                 </span>
             </div>
             <nav class="sidebar-menu">
-                <a class="<?= $activePage === 'dashboard' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>pages/dashboard.php">
+                <a class="<?= $activePage === 'dashboard' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>dashboard">
                     <i class="bi bi-grid-1x2"></i> Dashboard
                 </a>
-                <a class="<?= $activePage === 'pengguna' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>pages/pengguna/index.php">
+                <a class="<?= $activePage === 'pengguna' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>pengguna">
                     <i class="bi bi-people"></i> Pengguna
                 </a>
-                <a class="<?= $activePage === 'kategori' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>pages/kategori/index.php">
+                <a class="<?= $activePage === 'kategori' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>kategori">
                     <i class="bi bi-tags"></i> Kategori
                 </a>
-                <a class="<?= $activePage === 'produk' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>pages/produk/index.php">
+                <a class="<?= $activePage === 'produk' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>adminproduk">
                     <i class="bi bi-box"></i> Produk
                 </a>
-                <a class="<?= $activePage === 'pesanan' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>pages/pesanan/index.php">
+                <a class="<?= $activePage === 'pesanan' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>adminpesanan">
                     <i class="bi bi-receipt"></i> Pesanan
                 </a>
-                <a href="<?= BASE_URL; ?>auth/logout.php">
+                <a href="<?= BASE_URL; ?>auth/logout">
                     <i class="bi bi-box-arrow-right"></i> Logout
                 </a>
             </nav>
@@ -50,7 +50,7 @@ $flash = get_flash();
                     <h2><?= e($pageTitle); ?></h2>
                     <p>Kelola data toko dengan cepat dan rapi.</p>
                 </div>
-                <a href="<?= BASE_URL; ?>auth/logout.php" class="btn btn-outline-danger ms-auto">
+                <a href="<?= BASE_URL; ?>auth/logout" class="btn btn-outline-danger ms-auto">
                     <i class="bi bi-box-arrow-right me-1"></i> Logout
                 </a>
             </header>

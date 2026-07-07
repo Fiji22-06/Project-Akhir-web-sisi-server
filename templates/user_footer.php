@@ -5,15 +5,15 @@
                 <div class="footer-brand-block">
                     <div class="footer-brand">
                         <span class="user-brand-icon"><i class="bi bi-shop"></i></span>
-                        <strong>Toko Online</strong>
+                        <strong>TOKO BROD</strong>
                     </div>
                     <p>Belanja produk kebutuhan harian dengan proses mudah, cepat, dan status pesanan yang bisa dicek kapan saja.</p>
                 </div>
                 <div class="footer-column">
                     <h4>Menu Toko</h4>
-                    <a href="<?= BASE_URL; ?>user/produk.php">Produk</a>
-                    <a href="<?= BASE_URL; ?>user/keranjang.php">Keranjang</a>
-                    <a href="<?= BASE_URL; ?>user/cek_pesanan.php">Cek Pesanan</a>
+                    <a href="<?= BASE_URL; ?>produk">Produk</a>
+                    <a href="<?= BASE_URL; ?>keranjang">Keranjang</a>
+                    <a href="<?= BASE_URL; ?>pesanan/cek">Cek Pesanan</a>
                 </div>
                 <div class="footer-column">
                     <h4>Layanan</h4>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>&copy; <?= date('Y'); ?> Toko Online. Sistem Manajemen Data Produk Toko.</span>
+                <span>&copy; <?= date('Y'); ?> TOKO BROD. Sistem Manajemen Data Produk Toko.</span>
                 <span>Project UAS Web Sisi Server</span>
             </div>
         </div>

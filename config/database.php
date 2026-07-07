@@ -16,7 +16,7 @@ if (!$conn) {
 
 mysqli_set_charset($conn, 'utf8mb4');
 
-define('BASE_URL', '/manajemen_toko/');
+define('BASE_URL', '/');
 
 function e($value)
 {
@@ -85,7 +85,7 @@ function get_flash()
 function require_login()
 {
     if (empty($_SESSION['logged_in'])) {
-        header('Location: ' . BASE_URL . 'auth/login.php');
+        header('Location: ' . BASE_URL . 'auth/login');
         exit;
     }
 }
