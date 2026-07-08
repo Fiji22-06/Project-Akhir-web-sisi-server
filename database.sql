@@ -15,7 +15,7 @@ CREATE TABLE users (
     nama VARCHAR(100) NOT NULL,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'staff') NOT NULL DEFAULT 'staff',
+    role ENUM('admin', 'staff', 'user') NOT NULL DEFAULT 'staff',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -71,7 +71,8 @@ CREATE TABLE detail_pesanan (
 
 INSERT INTO users (nama, username, password, role) VALUES
 ('Administrator', 'admin', '$2y$10$BsGSPVKJoBQBDRFDIZcPjuMwSRU6hmkRGdF.l08KoiHPO5kJOzAC2', 'admin'),
-('Staff Gudang', 'staff', '$2y$10$BsGSPVKJoBQBDRFDIZcPjuMwSRU6hmkRGdF.l08KoiHPO5kJOzAC2', 'staff');
+('Staff Gudang', 'staff', '$2y$10$BsGSPVKJoBQBDRFDIZcPjuMwSRU6hmkRGdF.l08KoiHPO5kJOzAC2', 'staff'),
+('Pelanggan Demo', 'user', '$2y$10$gJcDBiIg9aO.I5Y9lR.JaubO8u1YxO2bCGaiRpNYjHILApk35ur3y', 'user');
 
 INSERT INTO kategori (nama_kategori, deskripsi) VALUES
 ('Elektronik', 'Produk elektronik dan perangkat pendukung.'),

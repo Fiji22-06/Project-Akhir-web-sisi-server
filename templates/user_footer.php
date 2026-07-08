@@ -17,9 +17,10 @@
                 </div>
                 <div class="footer-column">
                     <h4>Layanan</h4>
+                    <a href="<?= BASE_URL; ?>user/login"><i class="bi bi-person-circle"></i> Login User</a>
                     <span><i class="bi bi-bag-check"></i> Checkout tanpa akun</span>
                     <span><i class="bi bi-receipt"></i> Bukti pesanan otomatis</span>
-                    <a href="<?= BASE_URL; ?>auth/login.php"><i class="bi bi-shield-lock"></i> Login Admin</a>
+                    <a href="<?= BASE_URL; ?>auth/login"><i class="bi bi-shield-lock"></i> Login Admin</a>
                 </div>
             </div>
             <div class="footer-bottom">

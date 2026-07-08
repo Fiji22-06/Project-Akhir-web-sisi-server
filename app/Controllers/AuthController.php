@@ -5,7 +5,9 @@ class AuthController extends Controller {
     }
 
     public function login() {
-        if (!empty($_SESSION['logged_in'])) {
+        $role = $_SESSION['user']['role'] ?? '';
+
+        if (!empty($_SESSION['logged_in']) && in_array($role, ['admin', 'staff'], true)) {
             header('Location: ' . BASE_URL . 'dashboard');
             exit;
         }
@@ -26,7 +28,7 @@ class AuthController extends Controller {
         $userModel = $this->model('UserModel');
         $user = $userModel->findByUsername($username);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && in_array($user['role'], ['admin', 'staff'], true) && password_verify($password, $user['password'])) {
             $_SESSION['logged_in'] = true;
             $_SESSION['user'] = [
                 'id' => $user['id'],

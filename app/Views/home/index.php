@@ -13,10 +13,10 @@ require_once __DIR__ . '/../../../templates/user_header.php';
                 <h1 class="display-4 fw-bold text-gradient">Selamat Datang di TOKO BROD</h1>
                 <p class="lead text-muted">Solusi belanja pintar untuk kebutuhan Anda. Temukan barang berkualitas dengan harga terbaik hanya di TOKO BROD.</p>
                 <div class="hero-actions mt-4">
-                    <a href="<?= BASE_URL; ?>user/produk.php" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-lift">
+                    <a href="<?= BASE_URL; ?>produk" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-lift">
                         <i class="bi bi-bag me-1"></i> Mulai Belanja
                     </a>
-                    <a href="<?= BASE_URL; ?>user/cek_pesanan.php" class="btn btn-outline-primary btn-lg rounded-pill shadow-sm hover-lift">
+                    <a href="<?= BASE_URL; ?>pesanan/cek" class="btn btn-outline-primary btn-lg rounded-pill shadow-sm hover-lift">
                         <i class="bi bi-search me-1"></i> Lacak Pesanan
                     </a>
                 </div>
@@ -57,11 +57,11 @@ require_once __DIR__ . '/../../../templates/user_header.php';
                 <span class="section-label">Kategori</span>
                 <h2>Kategori Produk</h2>
             </div>
-            <a href="<?= BASE_URL; ?>user/produk.php" class="btn btn-light">Lihat semua</a>
+            <a href="<?= BASE_URL; ?>produk" class="btn btn-light">Lihat semua</a>
         </div>
         <div class="category-grid">
             <?php foreach ($data['kategori'] as $kategori): ?>
-                <a class="category-card" href="<?= BASE_URL; ?>user/produk.php?kategori_id=<?= $kategori['id']; ?>">
+                <a class="category-card" href="<?= BASE_URL; ?>produk?kategori_id=<?= $kategori['id']; ?>">
                     <i class="bi bi-tag"></i>
                     <strong><?= e($kategori['nama_kategori']); ?></strong>
                     <span><?= (int) $kategori['total_produk']; ?> produk</span>
@@ -79,7 +79,7 @@ require_once __DIR__ . '/../../../templates/user_header.php';
                 <span class="section-label">Terbaru</span>
                 <h2>Produk Terbaru</h2>
             </div>
-            <a href="<?= BASE_URL; ?>user/produk.php" class="btn btn-primary">Belanja Sekarang</a>
+            <a href="<?= BASE_URL; ?>produk" class="btn btn-primary">Belanja Sekarang</a>
         </div>
         <div class="product-grid">
             <?php foreach ($data['produkTerbaru'] as $produk): ?>
@@ -96,8 +96,8 @@ require_once __DIR__ . '/../../../templates/user_header.php';
                             <span>Stok <?= (int) $produk['stok']; ?></span>
                         </div>
                         <div class="product-actions">
-                            <a href="<?= BASE_URL; ?>user/detail_produk.php?id=<?= $produk['id']; ?>" class="btn btn-outline-primary btn-sm">Detail</a>
-                            <form action="<?= BASE_URL; ?>user/tambah_keranjang.php" method="post">
+                            <a href="<?= BASE_URL; ?>produk/detail?id=<?= $produk['id']; ?>" class="btn btn-outline-primary btn-sm">Detail</a>
+                            <form action="<?= BASE_URL; ?>keranjang/tambah" method="post">
                                 <input type="hidden" name="produk_id" value="<?= $produk['id']; ?>">
                                 <input type="hidden" name="jumlah" value="1">
                                 <button type="submit" class="btn btn-success btn-sm" <?= (int) $produk['stok'] <= 0 ? 'disabled' : ''; ?>>

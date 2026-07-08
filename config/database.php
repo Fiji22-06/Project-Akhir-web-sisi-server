@@ -16,7 +16,8 @@ if (!$conn) {
 
 mysqli_set_charset($conn, 'utf8mb4');
 
-define('BASE_URL', '/');
+$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/');
+define('BASE_URL', ($basePath === '' || $basePath === '.') ? '/' : $basePath . '/');
 
 function e($value)
 {
@@ -84,8 +85,29 @@ function get_flash()
 
 function require_login()
 {
-    if (empty($_SESSION['logged_in'])) {
+    $role = $_SESSION['user']['role'] ?? '';
+
+    if (empty($_SESSION['logged_in']) || !in_array($role, ['admin', 'staff'], true)) {
         header('Location: ' . BASE_URL . 'auth/login');
+        exit;
+    }
+}
+
+function customer_logged_in()
+{
+    return !empty($_SESSION['customer_logged_in']) && !empty($_SESSION['customer']);
+}
+
+function get_customer()
+{
+    return $_SESSION['customer'] ?? null;
+}
+
+function require_customer_login()
+{
+    if (!customer_logged_in()) {
+        set_flash('warning', 'Silakan login sebagai pelanggan terlebih dahulu.');
+        header('Location: ' . BASE_URL . 'user/login');
         exit;
     }
 }

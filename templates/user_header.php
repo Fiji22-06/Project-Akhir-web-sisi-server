@@ -4,6 +4,13 @@ require_once __DIR__ . '/../config/database.php';
 $pageTitle = $pageTitle ?? 'TOKO BROD';
 $activeUserPage = $activeUserPage ?? '';
 $flash = get_flash();
+$customer = get_customer();
+$customerFirstName = '';
+
+if ($customer) {
+    $nameParts = preg_split('/\s+/', trim($customer['nama']));
+    $customerFirstName = $nameParts[0] ?? $customer['nama'];
+}
 ?>
 <!doctype html>
 <html lang="id">
@@ -44,8 +51,27 @@ $flash = get_flash();
                         </a>
                     </li>
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-outline-primary btn-sm" href="<?= BASE_URL; ?>auth/login.php">
-                            <i class="bi bi-shield-lock me-1"></i> Login Admin
+                        <?php if (customer_logged_in()): ?>
+                            <div class="dropdown">
+                                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-1"></i> <?= e($customerFirstName); ?>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="<?= BASE_URL; ?>user/akun"><i class="bi bi-person me-2"></i>Akun Saya</a></li>
+                                    <li><a class="dropdown-item" href="<?= BASE_URL; ?>pesanan/cek"><i class="bi bi-receipt me-2"></i>Cek Pesanan</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="<?= BASE_URL; ?>user/logout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                                </ul>
+                            </div>
+                        <?php else: ?>
+                            <a class="btn btn-primary btn-sm" href="<?= BASE_URL; ?>user/login">
+                                <i class="bi bi-person-circle me-1"></i> Login User
+                            </a>
+                        <?php endif; ?>
+                    </li>
+                    <li class="nav-item ms-lg-1">
+                        <a class="btn btn-outline-secondary btn-sm" href="<?= BASE_URL; ?>auth/login">
+                            <i class="bi bi-shield-lock me-1"></i> Admin
                         </a>
                     </li>
                 </ul>

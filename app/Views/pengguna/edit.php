@@ -32,6 +32,7 @@ $user_data = $data['user_data'];
                 <?php $selectedRole = $_POST['role'] ?? $user_data['role']; ?>
                 <option value="admin" <?= $selectedRole === 'admin' ? 'selected' : ''; ?>>Admin</option>
                 <option value="staff" <?= $selectedRole === 'staff' ? 'selected' : ''; ?>>Staff</option>
+                <option value="user" <?= $selectedRole === 'user' ? 'selected' : ''; ?>>User Pelanggan</option>
             </select>
         </div>
         <div class="col-12 form-actions">

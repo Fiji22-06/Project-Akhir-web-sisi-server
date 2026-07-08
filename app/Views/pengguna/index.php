@@ -4,6 +4,16 @@ $activePage = $data['activePage'] ?? 'pengguna';
 require_once __DIR__ . '/../../../templates/header.php';
 require_once __DIR__ . '/../../../templates/sidebar.php';
 $users = $data['users'];
+$roleBadges = [
+    'admin' => 'text-bg-primary',
+    'staff' => 'text-bg-info',
+    'user' => 'text-bg-success',
+];
+$roleLabels = [
+    'admin' => 'Admin',
+    'staff' => 'Staff',
+    'user' => 'User Pelanggan',
+];
 ?>
 <section class="data-panel">
     <div class="panel-header">
@@ -36,7 +46,7 @@ $users = $data['users'];
                             <td><?= $no++; ?></td>
                             <td><?= e($row['nama']); ?></td>
                             <td><?= e($row['username']); ?></td>
-                            <td><span class="badge text-bg-primary"><?= e(ucfirst($row['role'])); ?></span></td>
+                            <td><span class="badge <?= e($roleBadges[$row['role']] ?? 'text-bg-secondary'); ?>"><?= e($roleLabels[$row['role']] ?? ucfirst($row['role'])); ?></span></td>
                             <td><?= date('d M Y', strtotime($row['created_at'])); ?></td>
                             <td class="text-end">
                                 <a href="<?= BASE_URL; ?>pengguna/edit?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">

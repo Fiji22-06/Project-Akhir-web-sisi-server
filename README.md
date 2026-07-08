@@ -18,6 +18,7 @@ Project memiliki dua sisi tampilan:
 - Checkout tanpa akun pelanggan.
 - Bukti pesanan dengan tombol print.
 - Cek pesanan menggunakan kode pesanan atau nomor HP.
+- Login, daftar, akun, dan logout pelanggan pada sisi user.
 - Login dan logout admin menggunakan session.
 - Alert login gagal: `Username atau password salah`.
 - Dashboard admin dengan statistik pengguna, kategori, produk, stok, pesanan, pendapatan, pesanan menunggu, dan pesanan selesai.
@@ -106,6 +107,11 @@ Jika membuka `http://localhost/manajemen_toko/`, sistem akan otomatis mengarah k
 
 - Username: `admin`
 - Password: `admin123`
+
+## Akun Login Pelanggan Default
+
+- Username: `user`
+- Password: `user123`
 
 ## Cara Menggunakan Keranjang
 

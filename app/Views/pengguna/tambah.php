@@ -31,6 +31,7 @@ require_once __DIR__ . '/../../../templates/sidebar.php';
                 <?php $selectedRole = $_POST['role'] ?? 'staff'; ?>
                 <option value="admin" <?= $selectedRole === 'admin' ? 'selected' : ''; ?>>Admin</option>
                 <option value="staff" <?= $selectedRole === 'staff' ? 'selected' : ''; ?>>Staff</option>
+                <option value="user" <?= $selectedRole === 'user' ? 'selected' : ''; ?>>User Pelanggan</option>
             </select>
         </div>
         <div class="col-12 form-actions">

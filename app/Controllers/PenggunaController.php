@@ -27,7 +27,7 @@ class PenggunaController extends Controller {
             $password = $_POST['password'] ?? '';
             $role = $_POST['role'] ?? 'staff';
 
-            if ($nama === '' || $username === '' || $password === '' || !in_array($role, ['admin', 'staff'], true)) {
+            if ($nama === '' || $username === '' || $password === '' || !in_array($role, ['admin', 'staff', 'user'], true)) {
                 set_flash('danger', 'Semua field wajib diisi dengan benar.');
             } else {
                 $check = mysqli_prepare($conn, 'SELECT id FROM users WHERE username = ? LIMIT 1');
@@ -77,7 +77,7 @@ class PenggunaController extends Controller {
             $password = $_POST['password'] ?? '';
             $role = $_POST['role'] ?? 'staff';
 
-            if ($nama === '' || $username === '' || !in_array($role, ['admin', 'staff'], true)) {
+            if ($nama === '' || $username === '' || !in_array($role, ['admin', 'staff', 'user'], true)) {
                 set_flash('danger', 'Field nama, username, dan role wajib diisi.');
             } else {
                 $check = mysqli_prepare($conn, 'SELECT id FROM users WHERE username = ? AND id != ? LIMIT 1');

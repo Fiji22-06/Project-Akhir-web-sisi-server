@@ -3,6 +3,8 @@ $pageTitle = $data['pageTitle'] ?? 'Checkout';
 $activeUserPage = $data['activeUserPage'] ?? 'keranjang';
 require_once __DIR__ . '/../../../templates/user_header.php';
 $cart = $data['cart'];
+$customer = get_customer();
+$checkoutName = $_SESSION['checkout_old']['nama_pelanggan'] ?? ($customer['nama'] ?? '');
 ?>
 <section class="page-hero compact">
     <div class="container">
@@ -19,7 +21,7 @@ $cart = $data['cart'];
                 <h3>Data Pelanggan</h3>
                 <div class="mb-3">
                     <label for="nama_pelanggan" class="form-label">Nama Pelanggan</label>
-                    <input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control" value="<?= e($_SESSION['checkout_old']['nama_pelanggan'] ?? ''); ?>" required>
+                    <input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control" value="<?= e($checkoutName); ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="no_hp" class="form-label">Nomor HP</label>
