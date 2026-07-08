@@ -47,7 +47,7 @@ if ($customer) {
                         <a class="nav-link cart-link <?= $activeUserPage === 'keranjang' ? 'active' : ''; ?>" href="<?= BASE_URL; ?>keranjang">
                             <i class="bi bi-cart3"></i>
                             Keranjang
-                            <span class="badge text-bg-success"><?= get_cart_count(); ?></span>
+                            <span class="badge text-bg-success cart-count-badge"><?= get_cart_count(); ?></span>
                         </a>
                     </li>
                     <li class="nav-item ms-lg-2">
@@ -59,20 +59,22 @@ if ($customer) {
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="<?= BASE_URL; ?>user/akun"><i class="bi bi-person me-2"></i>Akun Saya</a></li>
                                     <li><a class="dropdown-item" href="<?= BASE_URL; ?>pesanan/cek"><i class="bi bi-receipt me-2"></i>Cek Pesanan</a></li>
+                                    <li><a class="dropdown-item" href="<?= BASE_URL; ?>auth/login"><i class="bi bi-shield-lock me-2"></i>Login Admin</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item text-danger" href="<?= BASE_URL; ?>user/logout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                                 </ul>
                             </div>
                         <?php else: ?>
-                            <a class="btn btn-primary btn-sm" href="<?= BASE_URL; ?>user/login">
-                                <i class="bi bi-person-circle me-1"></i> Login User
-                            </a>
+                            <div class="dropdown">
+                                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-1"></i> Login
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="<?= BASE_URL; ?>user/login"><i class="bi bi-person me-2"></i>Login User</a></li>
+                                    <li><a class="dropdown-item" href="<?= BASE_URL; ?>auth/login"><i class="bi bi-shield-lock me-2"></i>Login Admin</a></li>
+                                </ul>
+                            </div>
                         <?php endif; ?>
-                    </li>
-                    <li class="nav-item ms-lg-1">
-                        <a class="btn btn-outline-secondary btn-sm" href="<?= BASE_URL; ?>auth/login">
-                            <i class="bi bi-shield-lock me-1"></i> Admin
-                        </a>
                     </li>
                 </ul>
             </div>

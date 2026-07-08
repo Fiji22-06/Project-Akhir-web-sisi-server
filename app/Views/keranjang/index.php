@@ -38,7 +38,7 @@ $cart = $data['cart'];
                             <tbody>
                                 <?php foreach ($cart['items'] as $item): ?>
                                     <?php $produk = $item['produk']; ?>
-                                    <tr>
+                                    <tr class="cart-item-row" data-cart-row data-unit-price="<?= (float) $produk['harga']; ?>">
                                         <td>
                                             <strong><?= e($produk['nama_produk']); ?></strong>
                                             <small class="d-block text-muted"><?= e($produk['nama_kategori'] ?? 'Tanpa Kategori'); ?></small>
@@ -47,11 +47,11 @@ $cart = $data['cart'];
                                         <td>
                                             <form action="<?= BASE_URL; ?>keranjang/update" method="post" class="qty-form">
                                                 <input type="hidden" name="produk_id" value="<?= $produk['id']; ?>">
-                                                <input type="number" name="jumlah" class="form-control form-control-sm" min="1" max="<?= (int) $produk['stok']; ?>" value="<?= (int) $item['jumlah']; ?>">
-                                                <button type="submit" class="btn btn-warning btn-sm">Update</button>
+                                                <input type="number" name="jumlah" class="form-control form-control-sm cart-qty-input" min="1" max="<?= (int) $produk['stok']; ?>" value="<?= (int) $item['jumlah']; ?>">
+                                                <button type="submit" class="btn btn-warning btn-sm qty-submit">Update</button>
                                             </form>
                                         </td>
-                                        <td><?= rupiah($item['subtotal']); ?></td>
+                                        <td><strong data-cart-subtotal><?= rupiah($item['subtotal']); ?></strong></td>
                                         <td class="text-end">
                                             <a href="<?= BASE_URL; ?>keranjang/hapus?id=<?= $produk['id']; ?>" class="btn btn-danger btn-sm btn-delete" onclick="return confirm('Hapus produk dari keranjang?');">
                                                 <i class="bi bi-trash"></i> Hapus
@@ -67,7 +67,7 @@ $cart = $data['cart'];
                     <h3>Ringkasan</h3>
                     <div class="summary-row">
                         <span>Total Belanja</span>
-                        <strong><?= rupiah($cart['total']); ?></strong>
+                        <strong data-cart-total><?= rupiah($cart['total']); ?></strong>
                     </div>
                     <a href="<?= BASE_URL; ?>checkout" class="btn btn-success w-100">
                         <i class="bi bi-bag-check me-1"></i> Lanjut Checkout

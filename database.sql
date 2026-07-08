@@ -42,6 +42,7 @@ CREATE TABLE produk (
 
 CREATE TABLE pesanan (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NULL,
     kode_pesanan VARCHAR(20) NULL UNIQUE,
     nama_pelanggan VARCHAR(100) NOT NULL,
     no_hp VARCHAR(20) NOT NULL,
@@ -49,7 +50,11 @@ CREATE TABLE pesanan (
     metode_pembayaran ENUM('COD', 'Transfer Bank', 'E-Wallet') NOT NULL,
     total_harga DECIMAL(12,2) NOT NULL DEFAULT 0,
     status_pesanan ENUM('Menunggu', 'Diproses', 'Selesai', 'Dibatalkan') NOT NULL DEFAULT 'Menunggu',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_pesanan_user
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE detail_pesanan (

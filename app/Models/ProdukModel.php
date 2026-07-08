@@ -13,6 +13,7 @@ class ProdukModel {
             "SELECT produk.id, produk.nama_produk, produk.harga, produk.stok, produk.deskripsi, kategori.nama_kategori
              FROM produk
              LEFT JOIN kategori ON kategori.id = produk.kategori_id
+             WHERE produk.stok > 0
              ORDER BY produk.id DESC
              LIMIT $limit"
         );
@@ -30,7 +31,7 @@ class ProdukModel {
         $sql = 'SELECT produk.id, produk.nama_produk, produk.harga, produk.stok, produk.deskripsi, kategori.nama_kategori
                 FROM produk
                 LEFT JOIN kategori ON kategori.id = produk.kategori_id
-                WHERE 1 = 1';
+                WHERE produk.stok > 0';
         $types = '';
         $params = [];
 
@@ -64,6 +65,19 @@ class ProdukModel {
              FROM produk
              LEFT JOIN kategori ON kategori.id = produk.kategori_id
              WHERE produk.id = ?',
+            'i',
+            [$id]
+        );
+        return mysqli_fetch_assoc($result);
+    }
+
+    public function getAvailableById($id) {
+        $result = prepared_query(
+            $this->conn,
+            'SELECT produk.*, kategori.nama_kategori
+             FROM produk
+             LEFT JOIN kategori ON kategori.id = produk.kategori_id
+             WHERE produk.id = ? AND produk.stok > 0',
             'i',
             [$id]
         );

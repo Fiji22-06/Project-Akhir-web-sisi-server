@@ -9,6 +9,14 @@ $detail = $data['detail'];
 <section class="shop-section">
     <div class="container receipt-wrap">
         <div class="receipt-card">
+            <div class="alert alert-success d-flex gap-3 mb-4" role="alert">
+                <i class="bi bi-check-circle-fill fs-4"></i>
+                <div>
+                    <strong>Pesanan berhasil diterima.</strong>
+                    <div>Kode pesanan Anda adalah <strong><?= e($pesanan['kode_pesanan']); ?></strong>. Status awal pesanan adalah <strong><?= e($pesanan['status_pesanan']); ?></strong>.</div>
+                </div>
+            </div>
+
             <div class="receipt-header">
                 <div>
                     <span class="section-label">Bukti Pesanan</span>
@@ -58,6 +66,10 @@ $detail = $data['detail'];
                 <button type="button" class="btn btn-primary" onclick="window.print()">
                     <i class="bi bi-printer me-1"></i> Print
                 </button>
+                <a href="<?= BASE_URL; ?>pesanan/cek?keyword=<?= urlencode($pesanan['kode_pesanan']); ?>" class="btn btn-outline-primary">Cek Status Pesanan</a>
+                <?php if (customer_logged_in()): ?>
+                    <a href="<?= BASE_URL; ?>user/akun" class="btn btn-outline-success">Akun Saya</a>
+                <?php endif; ?>
                 <a href="<?= BASE_URL; ?>" class="btn btn-light">Kembali ke Beranda</a>
             </div>
         </div>

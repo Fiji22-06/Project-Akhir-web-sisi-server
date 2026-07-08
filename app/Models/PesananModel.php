@@ -7,16 +7,17 @@ class PesananModel {
         $this->conn = $conn;
     }
 
-    public function createPesanan($nama, $noHp, $alamat, $metode, $cart) {
+    public function createPesanan($nama, $noHp, $alamat, $metode, $cart, $userId = null) {
         mysqli_begin_transaction($this->conn);
         try {
             $status = 'Menunggu';
+            $userId = $userId ? (int) $userId : null;
             $insertPesanan = mysqli_prepare(
                 $this->conn,
-                'INSERT INTO pesanan (kode_pesanan, nama_pelanggan, no_hp, alamat, metode_pembayaran, total_harga, status_pesanan)
-                 VALUES (NULL, ?, ?, ?, ?, ?, ?)'
+                'INSERT INTO pesanan (user_id, kode_pesanan, nama_pelanggan, no_hp, alamat, metode_pembayaran, total_harga, status_pesanan)
+                 VALUES (?, NULL, ?, ?, ?, ?, ?, ?)'
             );
-            mysqli_stmt_bind_param($insertPesanan, 'ssssds', $nama, $noHp, $alamat, $metode, $cart['total'], $status);
+            mysqli_stmt_bind_param($insertPesanan, 'issssds', $userId, $nama, $noHp, $alamat, $metode, $cart['total'], $status);
 
             if (!mysqli_stmt_execute($insertPesanan)) {
                 throw new Exception('Gagal menyimpan pesanan.');
@@ -36,12 +37,22 @@ class PesananModel {
                 $this->conn,
                 'INSERT INTO detail_pesanan (pesanan_id, produk_id, jumlah, harga, subtotal) VALUES (?, ?, ?, ?, ?)'
             );
+            $decreaseStock = mysqli_prepare(
+                $this->conn,
+                'UPDATE produk SET stok = stok - ? WHERE id = ? AND stok >= ?'
+            );
 
             foreach ($cart['items'] as $item) {
                 $produkId = (int) $item['produk']['id'];
                 $jumlah = (int) $item['jumlah'];
                 $harga = (float) $item['produk']['harga'];
                 $subtotal = (float) $item['subtotal'];
+
+                mysqli_stmt_bind_param($decreaseStock, 'iii', $jumlah, $produkId, $jumlah);
+
+                if (!mysqli_stmt_execute($decreaseStock) || mysqli_stmt_affected_rows($decreaseStock) < 1) {
+                    throw new Exception('Stok produk tidak mencukupi.');
+                }
 
                 mysqli_stmt_bind_param($insertDetail, 'iiidd', $pesananId, $produkId, $jumlah, $harga, $subtotal);
 
@@ -72,6 +83,26 @@ class PesananModel {
         $data = [];
         if($result) {
             while($row = mysqli_fetch_assoc($result)) {
+                $data[] = $row;
+            }
+        }
+        return $data;
+    }
+
+    public function getByUserId($userId) {
+        $result = prepared_query(
+            $this->conn,
+            'SELECT id, kode_pesanan, nama_pelanggan, no_hp, total_harga, status_pesanan, created_at
+             FROM pesanan
+             WHERE user_id = ?
+             ORDER BY id DESC
+             LIMIT 10',
+            'i',
+            [(int) $userId]
+        );
+        $data = [];
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $data[] = $row;
             }
         }

@@ -61,15 +61,18 @@ class CheckoutController extends Controller {
             exit;
         }
 
+        $customer = get_customer();
+        $userId = $customer['id'] ?? null;
         $pesananModel = $this->model('PesananModel');
-        $kodePesanan = $pesananModel->createPesanan($nama, $noHp, $alamat, $metode, $cart);
+        $kodePesanan = $pesananModel->createPesanan($nama, $noHp, $alamat, $metode, $cart, $userId);
 
         if ($kodePesanan) {
             unset($_SESSION['cart'], $_SESSION['checkout_old']);
+            set_flash('success', 'Pesanan berhasil diterima oleh sistem. Simpan kode pesanan ' . $kodePesanan . ' untuk cek status.');
             header('Location: ' . BASE_URL . 'pesanan/bukti?kode=' . urlencode($kodePesanan));
             exit;
         } else {
-            set_flash('danger', 'Checkout gagal diproses. Silakan coba lagi.');
+            set_flash('danger', 'Checkout gagal diproses. Stok produk mungkin sudah habis atau tidak mencukupi.');
             header('Location: ' . BASE_URL . 'checkout');
             exit;
         }

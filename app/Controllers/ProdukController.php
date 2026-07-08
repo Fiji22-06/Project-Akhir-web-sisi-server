@@ -22,10 +22,10 @@ class ProdukController extends Controller {
     public function detail() {
         $id = (int) ($_GET['id'] ?? 0);
         $produkModel = $this->model('ProdukModel');
-        $produk = $produkModel->getById($id);
+        $produk = $produkModel->getAvailableById($id);
 
         if (!$produk) {
-            set_flash('danger', 'Produk tidak ditemukan.');
+            set_flash('danger', 'Produk tidak ditemukan atau stok sudah habis.');
             header('Location: ' . BASE_URL . 'produk');
             exit;
         }

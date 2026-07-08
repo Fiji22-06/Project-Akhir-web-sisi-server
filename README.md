@@ -19,6 +19,10 @@ Project memiliki dua sisi tampilan:
 - Bukti pesanan dengan tombol print.
 - Cek pesanan menggunakan kode pesanan atau nomor HP.
 - Login, daftar, akun, dan logout pelanggan pada sisi user.
+- Riwayat pesanan pelanggan tampil di halaman Akun Saya setelah checkout.
+- Bukti pesanan menampilkan konfirmasi bahwa pesanan sudah diterima sistem.
+- Stok produk otomatis berkurang setelah checkout berhasil.
+- Produk dengan stok habis otomatis disembunyikan dari katalog pelanggan.
 - Login dan logout admin menggunakan session.
 - Alert login gagal: `Username atau password salah`.
 - Dashboard admin dengan statistik pengguna, kategori, produk, stok, pesanan, pendapatan, pesanan menunggu, dan pesanan selesai.

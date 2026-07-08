@@ -125,11 +125,14 @@ class UserController extends Controller {
 
     public function akun() {
         require_customer_login();
+        $customer = get_customer();
+        $pesananModel = $this->model('PesananModel');
 
         $this->view('user/akun', [
             'pageTitle' => 'Akun Saya',
             'activeUserPage' => 'akun',
-            'customer' => get_customer(),
+            'customer' => $customer,
+            'orders' => $pesananModel->getByUserId($customer['id']),
         ]);
     }
 

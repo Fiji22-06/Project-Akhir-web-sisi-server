@@ -2,6 +2,7 @@
 $pageTitle = $data['pageTitle'] ?? 'Akun Saya';
 $activeUserPage = $data['activeUserPage'] ?? 'akun';
 $customer = $data['customer'];
+$orders = $data['orders'] ?? [];
 require_once __DIR__ . '/../../../templates/user_header.php';
 ?>
 <section class="page-hero compact">
@@ -36,6 +37,34 @@ require_once __DIR__ . '/../../../templates/user_header.php';
                 </div>
             </div>
             <div class="col-lg-7">
+                <div class="checkout-summary mb-4">
+                    <h3>Pesanan Saya</h3>
+                    <?php if ($orders): ?>
+                        <div class="order-result-list mt-0">
+                            <?php foreach ($orders as $order): ?>
+                                <div class="order-result-card">
+                                    <div>
+                                        <strong><?= e($order['kode_pesanan']); ?></strong>
+                                        <span><?= date('d M Y H:i', strtotime($order['created_at'])); ?></span>
+                                    </div>
+                                    <div>
+                                        <span class="badge <?= status_badge_class($order['status_pesanan']); ?>"><?= e($order['status_pesanan']); ?></span>
+                                        <strong><?= rupiah($order['total_harga']); ?></strong>
+                                    </div>
+                                    <a href="<?= BASE_URL; ?>pesanan/detail?kode=<?= urlencode($order['kode_pesanan']); ?>" class="btn btn-outline-primary btn-sm">Detail</a>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="empty-state">
+                            <i class="bi bi-receipt"></i>
+                            <h3>Belum ada pesanan</h3>
+                            <p>Pesanan yang dibuat saat Anda login akan tampil di sini.</p>
+                            <a href="<?= BASE_URL; ?>produk" class="btn btn-primary">Belanja Sekarang</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
                 <div class="row g-3">
                     <div class="col-md-6">
                         <a href="<?= BASE_URL; ?>produk" class="order-summary-box d-block h-100 text-dark">
