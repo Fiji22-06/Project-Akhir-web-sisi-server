@@ -59,7 +59,6 @@ if ($customer) {
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="<?= BASE_URL; ?>user/akun"><i class="bi bi-person me-2"></i>Akun Saya</a></li>
                                     <li><a class="dropdown-item" href="<?= BASE_URL; ?>pesanan/cek"><i class="bi bi-receipt me-2"></i>Cek Pesanan</a></li>
-                                    <li><a class="dropdown-item" href="<?= BASE_URL; ?>auth/login"><i class="bi bi-shield-lock me-2"></i>Login Admin</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item text-danger" href="<?= BASE_URL; ?>user/logout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                                 </ul>
@@ -71,7 +70,7 @@ if ($customer) {
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="<?= BASE_URL; ?>user/login"><i class="bi bi-person me-2"></i>Login User</a></li>
-                                    <li><a class="dropdown-item" href="<?= BASE_URL; ?>auth/login"><i class="bi bi-shield-lock me-2"></i>Login Admin</a></li>
+                                    <li><a class="dropdown-item" href="<?= BASE_URL; ?>auth/login?fresh=1"><i class="bi bi-shield-lock me-2"></i>Login Admin</a></li>
                                 </ul>
                             </div>
                         <?php endif; ?>

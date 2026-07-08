@@ -56,9 +56,6 @@ $flash = get_flash();
                 <a href="<?= BASE_URL; ?>user/daftar" class="btn btn-outline-success w-100 mt-2">
                     <i class="bi bi-person-plus me-1"></i> Daftar Akun
                 </a>
-                <a href="<?= BASE_URL; ?>auth/login" class="btn btn-outline-primary w-100 mt-2">
-                    <i class="bi bi-shield-lock me-1"></i> Login Admin
-                </a>
                 <a href="<?= BASE_URL; ?>" class="btn btn-outline-secondary w-100 mt-2">
                     <i class="bi bi-house-door me-1"></i> Kembali ke Home
                 </a>

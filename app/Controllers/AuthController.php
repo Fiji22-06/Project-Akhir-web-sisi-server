@@ -5,6 +5,10 @@ class AuthController extends Controller {
     }
 
     public function login() {
+        if (($_GET['fresh'] ?? '') === '1') {
+            unset($_SESSION['logged_in'], $_SESSION['user']);
+        }
+
         $role = $_SESSION['user']['role'] ?? '';
 
         if (!empty($_SESSION['logged_in']) && in_array($role, ['admin', 'staff'], true)) {
